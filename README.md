@@ -1,100 +1,159 @@
-# Kweku Agyako — Portfolio
+# Harrison Kweku Agyako — Portfolio (React + Three.js)
 
-A personal portfolio site with extraordinary animations, particle effects, magnetic cursor, 3D card tilts, glitch text, and a typewriter hero.
+A production-ready, fully modular React portfolio with WebGL particle fields,
+GSAP ScrollTrigger animations, 3D tilt cards, and a magnetic cursor.
 
-## 🚀 Deploy to Vercel (Free)
+## Tech Stack
+
+| Layer      | Library                                        |
+|------------|------------------------------------------------|
+| Framework  | React 18 + Vite                                |
+| 3D / WebGL | Three.js + @react-three/fiber + @react-three/drei |
+| Animations | GSAP 3 + ScrollTrigger plugin                  |
+| Styling    | Tailwind CSS v3                                |
+
+---
+
+## Local Development
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Start dev server at http://localhost:3000
+npm run dev
+
+# 3. Build for production
+npm run build
+
+# 4. Preview production build locally
+npm run preview
+```
+
+---
+
+## Deploy to Vercel (Free)
 
 ### Option A — GitHub + Vercel (Recommended)
 
-1. **Push to GitHub**
-   ```bash
-   git init
-   git add .
-   git commit -m "initial portfolio"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/portfolio.git
-   git push -u origin main
-   ```
+```bash
+git init
+git add .
+git commit -m "initial portfolio"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/portfolio.git
+git push -u origin main
+```
 
-2. **Connect to Vercel**
-   - Go to [vercel.com](https://vercel.com) → Sign up / Log in with GitHub
-   - Click **"Add New Project"**
-   - Import your `portfolio` repo
-   - Leave all settings as default → click **Deploy**
-   - Your site goes live at `your-username.vercel.app` in ~30 seconds
+Then:
+1. Go to [vercel.com](https://vercel.com) → sign in with GitHub
+2. **Add New Project** → import the repo
+3. **Framework preset**: Vite  (auto-detected)
+4. Leave all other defaults → **Deploy**
 
-3. **Custom domain (optional)**
-   - In Vercel dashboard → your project → Settings → Domains
-   - Add any domain you own (e.g. `kwekuagyako.dev`)
+Live at `your-name.vercel.app` in ~60 seconds. Every `git push` auto-deploys.
 
 ### Option B — Vercel CLI
 
 ```bash
 npm install -g vercel
-cd portfolio/
-vercel
+npm run build
+vercel --prod
 ```
-Follow the prompts — done.
 
 ---
 
-## ➕ Adding a New Project
+## Project Structure
 
-Open `data.js` and add a new entry to the `projects` array:
+```
+kweku-portfolio/
+├── index.html                  ← Vite HTML entry
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+├── vercel.json                 ← SPA routing config
+└── src/
+    ├── main.jsx                ← React entry point
+    ├── App.jsx                 ← Root — wires all sections + cursor
+    ├── index.css               ← Tailwind base + global utilities
+    ├── data.js                 ← ✅ EDIT THIS to update content
+    ├── hooks/
+    │   ├── useCursor.js        ← Magnetic cursor (dot + lagging ring)
+    │   ├── useScrollReveal.js  ← IntersectionObserver fade-up helper
+    │   └── useTilt.js          ← 3D perspective tilt on mouse move
+    └── components/
+        ├── Navbar.jsx          ← Sticky nav with blur backdrop
+        ├── Hero.jsx            ← R3F Canvas (orbiting particle torus) + typewriter
+        ├── Skills.jsx          ← GSAP ScrollTrigger animated skill bars
+        ├── Projects.jsx        ← 3D tilt project cards with spotlight
+        ├── Experience.jsx      ← Timeline with tilt cards + staggered reveals
+        ├── Education.jsx       ← Education cards + certification badges
+        ├── Contact.jsx         ← Animated gradient CTA + social links
+        └── Footer.jsx
+```
+
+---
+
+## Updating Content
+
+**All content lives in `src/data.js`.** No other files need to change.
+
+### Add a new project
 
 ```js
+// In src/data.js, add to the `projects` array:
 {
-  id: 7,                          // next number
-  title: "My New App",
-  description: "What it does and why it matters.",
-  tags: ["Flutter", "Firebase"],
-  status: "In Development",       // "Completed" | "In Development" | "Concept / Pitched"
-  category: "Mobile App",         // shows up as a filter tab
-  icon: "🚀",                     // emoji
-  color: "#6C63FF",               // accent color (not currently displayed but stored)
-  github: "https://github.com/...", // null if private
-  demo: "https://...",            // null if no live demo
-  featured: false,                // true = "Featured" badge
-  year: 2026
+  title:       'My New App',
+  description: 'What it does.',
+  tags:        ['Flutter', 'Firebase'],
+  icon:        '🚀',
+  color:       '#6C63FF',
+  featured:    false,
+  github:      'https://github.com/...',  // or null
+  demo:        null,
 }
 ```
 
-Save, push to GitHub → Vercel auto-deploys in ~20 seconds. No admin panel needed.
+### Add a new experience
+
+```js
+// In src/data.js, add to the `experience` array:
+{
+  role:        'Software Engineer Intern',
+  company:     'Company Name · Location',
+  date:        'Jun 2026 – Aug 2026',
+  description: 'What you did.',
+  icon:        '💻',
+}
+```
+
+Then `git push` — Vercel deploys in ~20 seconds.
 
 ---
 
-## 📁 File Structure
+## Customizing the Design
 
+Edit CSS variables in `tailwind.config.js` → `theme.extend.colors`:
+
+```js
+navy:    '#0A0E1A',   // base background
+indigo:  '#6C63FF',   // primary accent
+cyan:    '#00F5FF',   // secondary highlights
+offwhite:'#F0EEF8',   // main text
 ```
-portfolio/
-├── index.html      ← Main site (all HTML + CSS + JS)
-├── data.js         ← All your content lives here
-├── vercel.json     ← Vercel routing config
-└── README.md       ← This file
-```
 
-## ✨ Animation Features
+---
 
-| Feature | Description |
-|---|---|
-| Particle field | Floating code characters (hex, tags, symbols) that drift across the background |
-| Magnetic cursor | Custom cursor with a lagging ring that expands on hover |
-| Typewriter hero | Cycles through your roles with realistic typing/deleting |
-| 3D card tilt | Project cards tilt in perspective based on mouse position |
-| Glitch headers | Section titles glitch with cyan/indigo chromatic aberration |
-| Skill bars | Animated fill bars triggered on scroll with glow effect |
-| Blob morphs | Blurred gradient blobs that slowly float in the hero |
-| Orbit badges | Tech badges orbiting your avatar on a spinning ring |
-| Scroll reveal | Cards fade up + slide in with staggered delays as you scroll |
-| Mouse gradient | Radial light follows cursor inside each project card |
+## Animation Features
 
-## 🎨 Customizing Colors
-
-Edit these CSS variables in `index.html` inside `:root {}`:
-
-```css
---indigo: #6C63FF;    /* primary accent */
---cyan: #00F5FF;      /* secondary accent / highlights */
---navy: #0A0E1A;      /* background */
---offwhite: #F0EEF8;  /* main text */
-```
+| Feature               | Where                      | Library     |
+|-----------------------|----------------------------|-------------|
+| Orbiting particle torus | `Hero.jsx` → R3F Canvas  | Three.js    |
+| Typewriter roles      | `Hero.jsx`                 | React state |
+| Magnetic cursor       | `useCursor.js`             | RAF lerp    |
+| Skill bar fill + count | `Skills.jsx`              | GSAP        |
+| ScrollTrigger reveals | All sections               | GSAP        |
+| 3D card tilt          | `useTilt.js`               | CSS transforms |
+| Mouse spotlight       | Project & exp cards        | radial-gradient |
+| Glitch text           | Section headers            | CSS animation |
+| Gradient text animate | Contact section            | CSS keyframes |
