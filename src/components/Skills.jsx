@@ -123,14 +123,14 @@ export default function Skills() {
   }, [])
 
   return (
-    <section id="skills" className="py-28 bg-navy2">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="skills" className="py-16 md:py-28 bg-navy2">
+      <div className="container mx-auto px-5 md:px-12">
 
-        <div ref={titleRef} className="opacity-0 mb-14">
+        <div ref={titleRef} className="opacity-0 mb-10 md:mb-14">
           <div className="section-label mb-3">Technical Arsenal</div>
           <h2
             className="font-display font-bold text-offwhite mb-4"
-            style={{ fontSize: 'clamp(32px, 4vw, 52px)', letterSpacing: '-1.5px' }}
+            style={{ fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '-1px' }}
           >
             <span className="glitch" data-text="Skills">Skills</span>{' '}
             <span className="text-gradient">& Tools</span>

@@ -47,46 +47,47 @@ export default function Contact() {
   }, [])
 
   return (
-    <section id="contact" className="py-32 bg-navy2 text-center">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="contact" className="py-20 md:py-32 bg-navy2 text-center">
+      <div className="container mx-auto px-5 md:px-12">
         <div ref={ref} className="opacity-0 max-w-2xl mx-auto">
 
           <div className="section-label justify-center mb-8">Let's Connect</div>
 
           <h2
             className="font-display font-bold text-gradient-animate mb-6"
-            style={{ fontSize: 'clamp(40px, 5vw, 64px)', letterSpacing: '-2px' }}
+            style={{ fontSize: 'clamp(32px, 6vw, 64px)', letterSpacing: '-1.5px' }}
           >
             Got a project?<br />Let's build it.
           </h2>
 
-          <p className="text-muted text-base md:text-lg leading-relaxed mb-10 max-w-lg mx-auto">
+          <p className="text-muted text-sm md:text-base lg:text-lg leading-relaxed mb-10 max-w-lg mx-auto">
             Whether it's a Flutter app, a security audit, a web system, or a great idea — I'm open
             to conversations that create real impact.
           </p>
 
-          {/* Email CTA */}
+          {/* Email CTA — truncate gracefully on narrow screens */}
           <a
             href={`mailto:${personal.email}`}
             data-hover
             className="
-              inline-flex items-center gap-3 px-8 py-4 mb-10
-              font-mono text-cyan text-base
+              inline-flex items-center gap-3 px-6 py-4 mb-10
+              font-mono text-cyan text-sm md:text-base
               border border-cyan/30 rounded-xl
               hover:bg-cyan/5 hover:shadow-cyan-glow hover:border-cyan/60
               transition-all duration-300 group
+              max-w-full overflow-hidden
             "
           >
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect width="20" height="16" x="2" y="4" rx="2"/>
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            {personal.email}
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-sm">↗</span>
+            <span className="truncate">{personal.email}</span>
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-sm shrink-0">↗</span>
           </a>
 
-          {/* Social links */}
-          <div className="flex justify-center gap-4">
+          {/* Social links — stack on very small screens */}
+          <div className="flex flex-wrap justify-center gap-4">
             {socials.map(({ label, href, icon }) => (
               <a
                 key={label}

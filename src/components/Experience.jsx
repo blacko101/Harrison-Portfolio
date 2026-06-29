@@ -13,12 +13,14 @@ function ExperienceCard({ exp, index }) {
   useEffect(() => {
     const el = wrapRef.current
     if (!el) return
+    const isMobile = window.innerWidth < 768
     const ctx = gsap.context(() => {
       gsap.fromTo(
         el,
-        { opacity: 0, x: index % 2 === 0 ? -32 : 32 },
+        // On mobile always fade up (no sideways shift = no overflow flash)
+        { opacity: 0, y: isMobile ? 24 : 0, x: isMobile ? 0 : (index % 2 === 0 ? -32 : 32) },
         {
-          opacity: 1, x: 0,
+          opacity: 1, y: 0, x: 0,
           duration: 0.7,
           delay: index * 0.1,
           ease: 'power3.out',
@@ -92,14 +94,14 @@ export default function Experience() {
   }, [])
 
   return (
-    <section id="experience" className="py-28 bg-navy2">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="experience" className="py-16 md:py-28 bg-navy2">
+      <div className="container mx-auto px-5 md:px-12">
 
-        <div ref={titleRef} className="opacity-0 mb-14">
+        <div ref={titleRef} className="opacity-0 mb-10 md:mb-14">
           <div className="section-label mb-3">Background</div>
           <h2
             className="font-display font-bold text-offwhite mb-4"
-            style={{ fontSize: 'clamp(32px, 4vw, 52px)', letterSpacing: '-1.5px' }}
+            style={{ fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '-1px' }}
           >
             <span className="glitch" data-text="Experience">Experience</span>
             {' & '}

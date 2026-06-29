@@ -10,9 +10,10 @@ function ParticleField() {
   const ref       = useRef()
   const clockRef  = useRef(0)
 
-  // Generate ~2400 particles in a sphere shell, some biased toward a torus
+  // Reduce particles on mobile for performance
   const [positions, colors] = useMemo(() => {
-    const count = 2400
+    const isMobile = window.innerWidth < 768
+    const count = isMobile ? 900 : 2400
     const pos   = new Float32Array(count * 3)
     const col   = new Float32Array(count * 3)
 
@@ -167,11 +168,11 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 py-32">
-        <div className="max-w-3xl">
+      <div className="relative z-10 container mx-auto px-6 md:px-12 pt-28 pb-20 md:py-32">
+        <div className="max-w-3xl mx-auto md:mx-0 text-center md:text-left">
           {/* Eyebrow */}
           <div
-            className="section-label mb-6"
+            className="section-label mb-6 justify-center md:justify-start"
             style={{ animation: 'fadeUp 0.7s 0.2s both' }}
           >
             Based in Accra, Ghana
@@ -179,10 +180,10 @@ export default function Hero() {
 
           {/* Name */}
           <h1
-            className="font-display font-bold leading-[1.04] tracking-tight mb-6"
+            className="font-display font-bold leading-[1.06] tracking-tight mb-6"
             style={{
-              fontSize: 'clamp(44px, 6vw, 80px)',
-              letterSpacing: '-2px',
+              fontSize: 'clamp(42px, 8vw, 80px)',
+              letterSpacing: '-1.5px',
               animation: 'fadeUp 0.7s 0.4s both',
             }}
           >
@@ -203,13 +204,16 @@ export default function Hero() {
           </h1>
 
           {/* Typewriter */}
-          <div style={{ animation: 'fadeUp 0.7s 0.6s both' }}>
+          <div
+            className="flex justify-center md:justify-start"
+            style={{ animation: 'fadeUp 0.7s 0.6s both' }}
+          >
             <Typewriter roles={personal.roles} />
           </div>
 
           {/* Bio */}
           <p
-            className="text-muted text-base md:text-lg leading-relaxed max-w-xl mt-6 mb-10"
+            className="text-muted text-sm md:text-base lg:text-lg leading-relaxed max-w-xl mt-6 mb-10 mx-auto md:mx-0"
             style={{ animation: 'fadeUp 0.7s 0.8s both' }}
           >
             {personal.bio}
@@ -217,14 +221,14 @@ export default function Hero() {
 
           {/* CTAs */}
           <div
-            className="flex flex-wrap gap-4"
+            className="flex flex-wrap gap-4 justify-center md:justify-start"
             style={{ animation: 'fadeUp 0.7s 1.0s both' }}
           >
             <a
               href="#projects"
               data-hover
               className="
-                inline-flex items-center gap-2 px-7 py-3.5
+                inline-flex items-center gap-2 px-6 py-3 md:px-7 md:py-3.5
                 bg-indigo text-white font-semibold text-sm rounded-lg
                 shadow-indigo-glow hover:shadow-[0_0_60px_rgba(108,99,255,0.6)]
                 hover:-translate-y-1 active:scale-95
@@ -239,7 +243,7 @@ export default function Hero() {
               rel="noreferrer"
               data-hover
               className="
-                inline-flex items-center gap-2 px-7 py-3.5
+                inline-flex items-center gap-2 px-6 py-3 md:px-7 md:py-3.5
                 border border-indigo/40 text-offwhite font-semibold text-sm rounded-lg
                 hover:border-cyan hover:text-cyan hover:shadow-cyan-glow
                 hover:-translate-y-1 active:scale-95

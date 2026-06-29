@@ -105,14 +105,14 @@ export default function Education() {
   }, [])
 
   return (
-    <section id="education" className="py-28 bg-navy">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="education" className="py-16 md:py-28 bg-navy">
+      <div className="container mx-auto px-5 md:px-12">
 
-        <div ref={titleRef} className="opacity-0 mb-14">
+        <div ref={titleRef} className="opacity-0 mb-10 md:mb-14">
           <div className="section-label mb-3">Academic Path</div>
           <h2
             className="font-display font-bold text-offwhite mb-4"
-            style={{ fontSize: 'clamp(32px, 4vw, 52px)', letterSpacing: '-1.5px' }}
+            style={{ fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '-1px' }}
           >
             Education{' '}
             <span className="text-gradient">&amp; Certs</span>

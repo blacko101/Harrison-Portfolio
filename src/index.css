@@ -15,6 +15,12 @@
     cursor: none;
   }
 
+  /* ── Touch / mobile: restore native cursor, hide custom cursor elements ── */
+  @media (hover: none) and (pointer: coarse) {
+    body { cursor: auto; }
+    a, button, [data-hover] { cursor: pointer; }
+  }
+
   ::selection {
     background: rgba(108, 99, 255, 0.35);
     color: #F0EEF8;
@@ -90,6 +96,8 @@
 .glitch {
   position: relative;
   display: inline-block;
+  /* prevent pseudo-elements from causing horizontal scroll on mobile */
+  overflow: hidden;
 }
 .glitch::before,
 .glitch::after {
@@ -112,6 +120,11 @@
   animation: glitch2 4s infinite 3s;
 }
 
+/* Disable glitch animation on mobile to prevent layout jank */
+@media (max-width: 640px) {
+  .glitch::before, .glitch::after { display: none; }
+}
+
 @keyframes glitch1 {
   0%, 88%, 100% { transform: translate(0); }
   90% { transform: translate(-3px, 1px); }
@@ -125,7 +138,7 @@
   94% { transform: translate(2px, -2px); }
 }
 
-/* custom cursor */
+/* custom cursor — desktop/pointer only */
 .cursor-dot {
   width: 8px; height: 8px;
   background: #00F5FF;
@@ -150,6 +163,11 @@
   transform: scale(2.5);
   border-color: #00F5FF;
   opacity: 0.5;
+}
+
+/* Hide on touch devices entirely */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none !important; }
 }
 
 /* skill bar fill animation class  */
