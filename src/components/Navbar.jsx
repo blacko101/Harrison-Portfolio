@@ -126,16 +126,12 @@ export default function Navbar() {
             key={href}
             href={href}
             onClick={closeMenu}
-            className="
-              font-display font-semibold text-3xl text-offwhite/70
-              hover:text-offwhite hover:text-gradient
-              transition-all duration-200
-            "
+            className="font-display font-semibold text-3xl text-offwhite/70 hover:text-offwhite"
             style={{
-              transitionDelay: menuOpen ? `${i * 60}ms` : '0ms',
+              // Use only the transition shorthand — never mix with transitionDelay
+              transition: `opacity 0.35s ease ${i * 60}ms, transform 0.35s ease ${i * 60}ms, color 0.2s ease`,
               transform: menuOpen ? 'translateY(0)' : 'translateY(20px)',
               opacity: menuOpen ? 1 : 0,
-              transition: `opacity 0.35s ${i * 60}ms, transform 0.35s ${i * 60}ms, color 0.2s`,
             }}
           >
             {label}
@@ -150,12 +146,10 @@ export default function Navbar() {
             mt-4 px-8 py-3 text-sm font-semibold
             border border-indigo/40 rounded-xl text-offwhite
             hover:border-cyan hover:text-cyan
-            transition-all duration-300
           "
           style={{
-            transitionDelay: menuOpen ? `${links.length * 60}ms` : '0ms',
+            transition: `opacity 0.35s ease ${links.length * 60}ms`,
             opacity: menuOpen ? 1 : 0,
-            transition: `opacity 0.35s ${links.length * 60}ms`,
           }}
         >
           Hire Me →

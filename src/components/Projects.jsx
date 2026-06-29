@@ -147,11 +147,11 @@ export default function Projects() {
         <div ref={titleRef} className="opacity-0 mb-10 md:mb-14">
           <div className="section-label mb-3">Selected Work</div>
           <h2
-            className="font-display font-bold text-offwhite mb-4"
+            className="font-display font-bold text-offwhite mb-4 leading-tight"
             style={{ fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '-1px' }}
           >
-            What I've{' '}
-            <span className="glitch text-gradient" data-text="Built">Built</span>
+            <span className="glitch" data-text="What I've Built">What I've </span>
+            <span className="text-gradient">Built</span>
           </h2>
           <p className="text-muted text-base max-w-md leading-relaxed">
             Apps and systems I've built for real-world impact — from GRA field operations to campus security.

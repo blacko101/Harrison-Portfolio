@@ -38,6 +38,9 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Prevent gradient spans from floating off the text baseline */
+    display: inline;
+    vertical-align: baseline;
   }
 
   .text-gradient-animate {
@@ -95,8 +98,10 @@
 /* glitch effect */
 .glitch {
   position: relative;
-  display: inline-block;
-  overflow: hidden;
+  /* inline keeps the element on the text baseline — inline-block was
+     causing gradient spans to float above surrounding text */
+  display: inline;
+  vertical-align: baseline;
 }
 .glitch::before,
 .glitch::after {

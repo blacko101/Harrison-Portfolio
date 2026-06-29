@@ -111,7 +111,7 @@ export default function Education() {
         <div ref={titleRef} className="opacity-0 mb-10 md:mb-14">
           <div className="section-label mb-3">Academic Path</div>
           <h2
-            className="font-display font-bold text-offwhite mb-4"
+            className="font-display font-bold text-offwhite mb-4 leading-tight"
             style={{ fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '-1px' }}
           >
             Education{' '}
